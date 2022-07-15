@@ -1,0 +1,21 @@
+version: "1.0"
+services:
+  main:
+    container_name: main
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run start
+    depends_on:
+      - redis
+    restart: always
+
+  redis:
+    container_name: redis
+    image: redis:7
+    ports:
+      - 6379:6379
